@@ -17,7 +17,6 @@ void ROBOTHardwareInterface::init() {
     
     
     joint_name_={"shoulder_pan_joint","shoulder_lift_joint","elbow_joint","wrist_1_joint","wrist_2_joint","wrist_3_joint"};
-    jointStateHandle_name={"jointStateHandle1","jointStateHandle2","jointStateHandle3","jointStateHandle4","jointStateHandle5","jointStateHandle6"};
     joint_position_.resize(joint_num,0.0);
     joint_velocity_.resize(joint_num,0.0);
     joint_effort_.resize(joint_num,0.0);
@@ -52,10 +51,6 @@ void ROBOTHardwareInterface::read() {
 }
 
 void ROBOTHardwareInterface::write(ros::Duration elapsed_time) {
-
-
-	
-	ROS_INFO("PWM Cmd: %.2f",joint_position_command_);
     joint_position_=joint_position_command_;
 }
 

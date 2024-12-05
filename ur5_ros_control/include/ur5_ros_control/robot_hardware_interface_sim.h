@@ -33,7 +33,6 @@ class ROBOTHardwareInterface : public hardware_interface::RobotHW
         joint_limits_interface::EffortJointSaturationInterface effortJointSaturationInterface;
         
         std::vector<string> joint_name_;  
-        std::vector<string> jointStateHandle_name;
         vector<double> joint_position_;
         vector<double> joint_velocity_;
         vector<double> joint_effort_;
