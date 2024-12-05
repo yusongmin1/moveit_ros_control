@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <rosparam file="$(find ur5_ros_control)/config/one_joint.yaml" command="load"/>
+  <!-- <rosparam file="$(find ur5_ros_control)/config/joint_limits.yaml" command="load"/> -->
+   
+   <param name="robot_description" textfile="$(find ur5_description)/urdf/ur5.urdf" />
+
+  
+  <node name="robot_hardware_interface_node_sim" pkg="ur5_ros_control" type="robot_hardware_interface_node_sim" output="screen"/>
+  
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+  </node>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ur5_description)/config/ur5.rviz" required="true" />
+    
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="
+        	/ur5/joints_state_publisher
+          /ur5/joint1_position_controller
+          /ur5/joint2_position_controller
+
+        "/>
+</launch>
+          <!-- /ur5/joint3_position_controller
+          /ur5/joint4_position_controller
+          /ur5/joint5_position_controller
+          /ur5/joint6_position_controller -->
