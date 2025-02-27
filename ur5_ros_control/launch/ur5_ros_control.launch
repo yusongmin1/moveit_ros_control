@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <rosparam file="$(find ur5_ros_control)/config/multijoint.yaml.yaml" command="load"/>
+  <rosparam file="$(find ur5_ros_control)/config/usercontroller.yaml" command="load"/>  
+  <param name="robot_description" textfile="$(find ur5_description)/urdf/ur5.urdf" />
+
+  
+  <node name="ur5_ros_control_sim" pkg="ur5_ros_control" type="ur5_ros_control_sim" output="screen"/>
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+  </node>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ur5_description)/config/ur5.rviz" required="true" />
+              
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="
+        	joints_state_publisher
+          arm_controller
+          
+        "/>
+        
+</launch>
